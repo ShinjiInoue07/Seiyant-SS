@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -100,12 +100,14 @@
             transition: all 0.2s;
         }
 
-        /* Top bar with icon only buttons (di atas header) */
+        /* Top bar - centered */
         .top-bar {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
+            align-items: center;
             gap: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
         }
 
         /* Switch buttons - icon only, warna merah sesuai tema */
@@ -122,6 +124,7 @@
             transition: all 0.2s ease;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
             color: #C62828;
+            position: relative;
         }
         body.dark .icon-btn {
             background: #2C2C2C;
@@ -135,8 +138,41 @@
             font-size: 24px;
         }
 
-        /* Language switch button khusus (diberi background beda) */
-        .lang-btn {
+        /* Tooltip styling */
+        .icon-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: #1C1B1F;
+            color: white;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 24px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            z-index: 1000;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        body.dark .icon-btn::after {
+            background: #2C2C2C;
+            color: #FFCDD2;
+        }
+        .icon-btn:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-4px);
+        }
+        .lang-btn::after, .glass-btn::after, .mg-btn::after {
+            white-space: nowrap;
+        }
+
+        /* Language switch button & gallery (MG) button - same style */
+        .lang-btn, .mg-btn {
             background: #FFE0E0;
             width: auto;
             padding: 0 16px;
@@ -144,34 +180,32 @@
             font-weight: 600;
             font-size: 14px;
         }
-        body.dark .lang-btn {
+        body.dark .lang-btn, body.dark .mg-btn {
             background: #3A2525;
         }
-        .lang-btn .material-symbols-outlined {
+        .lang-btn .material-symbols-outlined, .mg-btn .material-symbols-outlined {
             font-size: 20px;
         }
 
-        /* Hero Section - tanpa icon cloud, teks bounce */
+        /* Hero Section */
         .hero {
             margin-bottom: 32px;
             text-align: center;
         }
         
-        /* animasi bounce untuk teks hero */
         .bounce-text {
             display: inline-block;
             animation: bounceSoft 2s ease-in-out infinite;
             transform-origin: center;
-            cursor: pointer; /* tambahkan kursor pointer agar terlihat bisa diklik */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 80px;
+            padding: 12px 28px;
         }
         
         @keyframes bounceSoft {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-8px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
         
         h1 {
@@ -187,7 +221,7 @@
             letter-spacing: -0.2px;
         }
 
-        /* Stats Card - TikTok Link */
+        /* Stats Card */
         .stats-card {
             background: linear-gradient(135deg, #C62828 0%, #D32F2F 100%);
             border-radius: 32px;
@@ -203,7 +237,6 @@
         }
         .stats-card:active {
             transform: scale(0.98);
-            box-shadow: 0 4px 12px rgba(198, 40, 40, 0.4);
         }
         .stats-left {
             display: flex;
@@ -241,7 +274,7 @@
             gap: 4px;
         }
 
-        /* DONATE CARD - Sociabuzz (baru di bawah stats card) */
+        /* DONATE CARD */
         .donate-card {
             background: linear-gradient(135deg, #FFF5F0 0%, #FFEBE6 100%);
             border-radius: 28px;
@@ -396,7 +429,7 @@
             font-weight: 400;
         }
 
-        /* Pagination Controls - Tombol Next Number */
+        /* Pagination Controls */
         .pagination-control {
             display: flex;
             justify-content: center;
@@ -446,31 +479,24 @@
             background: #2A2A2A;
             color: #FFABAB;
         }
+        
         .pagination-info {
             font-size: 12px;
-            color: #EF9A9A;
             text-align: center;
             margin-top: 8px;
+            color: #EF9A9A;
         }
         body.dark .pagination-info {
             color: #AA6A6A;
         }
 
-        /* LAYOUT: LIST (default) - TAPI KITA SET DEFAULT GRID */
+        /* GRID LAYOUT - Fixed, no list mode */
         .download-list {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
         }
 
-        /* LIST MODE (override jika tombol list ditekan) */
-        .download-list.list-mode {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        /* Style untuk item dalam mode grid (default) */
         .download-list .download-item {
             flex-direction: column;
             align-items: flex-start;
@@ -497,26 +523,7 @@
             flex-wrap: wrap;
         }
 
-        /* Mode list (override untuk list) */
-        .download-list.list-mode .download-item {
-            flex-direction: row;
-            align-items: center;
-            padding: 16px 20px;
-            gap: 16px;
-        }
-        .download-list.list-mode .download-item .item-icon {
-            width: 52px;
-            height: 52px;
-            margin-bottom: 0;
-        }
-        .download-list.list-mode .download-item .arrow-icon {
-            display: block;
-        }
-        .download-list.list-mode .download-item .item-content {
-            width: auto;
-        }
-
-        /* Material 3 Card Item (base) */
+        /* Material 3 Card Item */
         .download-item {
             background: #FFFFFF;
             border-radius: 28px;
@@ -526,6 +533,7 @@
             border: 1px solid #FFCDD2;
             position: relative;
             overflow: hidden;
+            display: flex;
         }
         .download-item::before {
             content: '';
@@ -585,7 +593,6 @@
             gap: 8px;
             align-items: center;
         }
-        /* Label "Developer" */
         .meta-badge {
             background: #FFEBEE;
             padding: 4px 12px;
@@ -608,12 +615,6 @@
             box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 1px 2px rgba(0,0,0,0.1);
             backdrop-filter: blur(2px);
             font-family: monospace;
-        }
-
-        .arrow-icon {
-            color: #EF9A9A;
-            position: relative;
-            z-index: 1;
         }
 
         .fab {
@@ -653,16 +654,11 @@
                 transform: translateY(-2px);
                 box-shadow: 0 8px 20px rgba(198,40,40,0.12);
             }
-            .stats-card:hover {
+            .stats-card:hover, .donate-card:hover {
                 transform: translateY(-2px);
-            }
-            .donate-card:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(198,40,40,0.15);
             }
         }
 
-        /* Pada layar sangat kecil, grid tetap 2 kolom */
         @media (max-width: 480px) {
             .download-list {
                 grid-template-columns: repeat(2, 1fr);
@@ -680,29 +676,32 @@
             }
         }
 
-        /* --- Style untuk halaman easter egg (fullscreen) --- */
+        /* Easter Egg Page */
         .easter-egg-page {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #1A1A1A;
+            background: rgba(0,0,0,0.85);
             z-index: 2000;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: 'Inter', monospace;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
             animation: fadeIn 0.3s ease;
+        }
+        body.dark .easter-egg-page {
+            background: rgba(0,0,0,0.9);
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
         .egg-content {
-            background: rgba(30,30,35,0.95);
+            background: rgba(255,255,255,0.95);
             border-radius: 64px;
             padding: 40px 32px;
             text-align: center;
@@ -710,37 +709,52 @@
             width: 360px;
             box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 0 2px #C62828 inset;
             border: 1px solid #FF8A80;
+            transition: background 0.2s, color 0.2s;
+        }
+        body.dark .egg-content {
+            background: #1E1E2E;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.8);
         }
         .question-mark {
-            font-size: 120px;
+            font-size: 80px;
             font-weight: 800;
             color: #FF6B6B;
             text-shadow: 0 0 12px #C62828;
             margin-bottom: 20px;
-            letter-spacing: -8px;
+        }
+        body.dark .question-mark {
+            color: #FF8A80;
         }
         .egg-image {
-            font-size: 70px;
             margin: 10px 0;
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+        }
+        .egg-image img {
+            width: 100%;
+            max-width: 180px;
+            border-radius: 28px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
         }
         .egg-message {
             font-size: 20px;
             font-weight: 600;
-            color: #FFE0B5;
-            background: #2C2C2C;
+            color: #B71C1C;
+            background: #FFE0E0;
             display: inline-block;
             padding: 6px 18px;
             border-radius: 60px;
             margin: 20px 0 16px;
+        }
+        body.dark .egg-message {
+            background: #3A2525;
+            color: #FFCDD2;
         }
         .back-button {
             background: #C62828;
             border: none;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
-            font-size: 18px;
-            padding: 10px 28px;
+            font-size: 16px;
+            padding: 10px 24px;
             border-radius: 44px;
             color: white;
             display: inline-flex;
@@ -749,34 +763,308 @@
             cursor: pointer;
             transition: all 0.2s;
             margin-top: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .back-button:active {
             transform: scale(0.96);
             background: #A52121;
         }
-        body.dark .egg-content {
-            background: #0F0F12;
+
+        /* Gallery Modal */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(20px);
+            animation: fadeIn 0.2s ease;
+        }
+        body.dark .gallery-modal {
+            background: rgba(0,0,0,0.9);
+        }
+        .gallery-content {
+            background: rgba(255,255,255,0.95);
+            border-radius: 48px;
+            padding: 24px;
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+        body.dark .gallery-content {
+            background: #1E1E2E;
+            border-color: rgba(255,255,255,0.2);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .gallery-img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 2px solid transparent;
+        }
+        .gallery-img:hover {
+            transform: scale(1.02);
+            border-color: #C62828;
+        }
+        .gallery-close {
+            background: #C62828;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+        .gallery-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #B71C1C;
+            margin-bottom: 8px;
+        }
+        body.dark .gallery-title {
+            color: #FF8A80;
+        }
+        .gallery-sub {
+            font-size: 13px;
+            color: #8B3A3A;
+            margin-bottom: 16px;
+        }
+        body.dark .gallery-sub {
+            color: #E0A0A0;
+        }
+
+        /* ========== ENHANCED FROSTED GLASS - LESS BLUR, BETTER VISIBILITY ========== */
+        body.frosted-glass {
+            background: url('https://i.postimg.cc/yNpxTygN/e12b768e955663ccbe9be3a230e2bfa1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        /* Reduced blur for background image clarity */
+        body.frosted-glass::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 250, 240, 0.35);
+            backdrop-filter: blur(8px) saturate(150%);
+            -webkit-backdrop-filter: blur(8px) saturate(150%);
+            z-index: -1;
+            pointer-events: none;
+            transition: background 0.3s ease;
+        }
+        body.frosted-glass.dark::before {
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(10px) saturate(140%);
+        }
+        
+        /* Hero text - glass but legible */
+        body.frosted-glass .bounce-text {
+            background: rgba(255, 248, 240, 0.65) !important;
+            backdrop-filter: blur(12px);
+            border-radius: 96px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255,255,245,0.6);
+        }
+        body.frosted-glass.dark .bounce-text {
+            background: rgba(25, 20, 28, 0.7) !important;
+            border-color: rgba(255,210,170,0.3);
+        }
+        
+        /* Stats card tetap solid */
+        body.frosted-glass .stats-card {
+            background: linear-gradient(135deg, rgba(229, 57, 53, 0.95), rgba(198, 40, 40, 0.98)) !important;
+            backdrop-filter: blur(4px);
+        }
+        body.frosted-glass.dark .stats-card {
+            background: linear-gradient(135deg, rgba(150, 40, 35, 0.96), rgba(110, 30, 25, 0.98)) !important;
+        }
+        
+        /* Download items - glass with lower opacity but still readable */
+        body.frosted-glass .download-item {
+            background: rgba(250, 245, 240, 0.7) !important;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 220, 190, 0.7);
+            border-radius: 32px;
+        }
+        body.frosted-glass.dark .download-item {
+            background: rgba(20, 18, 26, 0.75) !important;
+            border-color: rgba(200, 130, 100, 0.45);
+        }
+        body.frosted-glass .item-title {
+            color: #2C221E !important;
+        }
+        body.frosted-glass.dark .item-title {
+            color: #FFEAD8 !important;
+        }
+        
+        /* Donate Card Glass */
+        body.frosted-glass .donate-card {
+            background: rgba(255, 240, 230, 0.75) !important;
+            backdrop-filter: blur(10px);
+        }
+        body.frosted-glass.dark .donate-card {
+            background: rgba(40, 30, 30, 0.8) !important;
+        }
+        
+        /* Disclaimer Card Glass */
+        body.frosted-glass .disclaimer-card {
+            background: rgba(250, 240, 235, 0.7) !important;
+            backdrop-filter: blur(10px);
+        }
+        body.frosted-glass.dark .disclaimer-card {
+            background: rgba(30, 24, 28, 0.8) !important;
+        }
+        
+        /* Search Box */
+        body.frosted-glass .search-box {
+            background: rgba(250, 245, 238, 0.75) !important;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(200, 130, 100, 0.5);
+        }
+        body.frosted-glass.dark .search-box {
+            background: rgba(25, 22, 30, 0.8) !important;
+        }
+        
+        /* PAGINATION & FOOTER - WHITE TEXT FOR LIGHT MODE (kontras tinggi) */
+        body.frosted-glass .page-btn,
+        body.frosted-glass .page-number {
+            background: rgba(0, 0, 0, 0.55) !important;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 245, 220, 0.5);
+            color: #FFFFFF !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        body.frosted-glass .page-btn:active {
+            background: rgba(0, 0, 0, 0.75) !important;
+        }
+        body.frosted-glass .pagination-info {
+            color: #FFFFFF !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            font-weight: 500;
+        }
+        body.frosted-glass .footer {
+            color: #FFFFFF !important;
+            border-top-color: rgba(255, 245, 220, 0.4);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        /* Dark mode pagination tetap nyaman - dark background dengan teks terang */
+        body.frosted-glass.dark .page-btn,
+        body.frosted-glass.dark .page-number {
+            background: rgba(0, 0, 0, 0.65) !important;
+            border-color: rgba(200, 150, 120, 0.5);
+            color: #FFE5D0 !important;
+        }
+        body.frosted-glass.dark .pagination-info,
+        body.frosted-glass.dark .footer {
+            color: #FFE5D0 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        /* Top bar icons - tetap visible */
+        body.frosted-glass .icon-btn {
+            background: rgba(0, 0, 0, 0.45) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,220,180,0.5);
+            color: #FFFFFF !important;
+        }
+        body.frosted-glass.dark .icon-btn {
+            background: rgba(0, 0, 0, 0.6) !important;
+            color: #FFD8C0 !important;
+        }
+        body.frosted-glass .icon-btn .material-symbols-outlined {
+            color: #FFFFFF;
+        }
+        body.frosted-glass.dark .icon-btn .material-symbols-outlined {
+            color: #FFD8C0;
+        }
+        
+        /* Additional text contrast for light mode glass */
+        body.frosted-glass .disclaimer-text,
+        body.frosted-glass .disclaimer-title {
+            color: #1E1A16 !important;
+            text-shadow: 0 0 2px rgba(255,255,240,0.5);
+        }
+        body.frosted-glass.dark .disclaimer-text,
+        body.frosted-glass.dark .disclaimer-title {
+            color: #F2DECE !important;
+        }
+        body.frosted-glass .donate-title,
+        body.frosted-glass .donate-sub {
+            color: #4A2A1E !important;
+        }
+        body.frosted-glass.dark .donate-title,
+        body.frosted-glass.dark .donate-sub {
+            color: #FFCDB0 !important;
+        }
+        body.frosted-glass .search-box input {
+            color: #2E241E !important;
+        }
+        body.frosted-glass .search-box input::placeholder {
+            color: #6A4A38 !important;
+        }
+        body.frosted-glass.dark .search-box input {
+            color: #FCE5D4 !important;
+        }
+        body.frosted-glass .meta-badge {
+            background: rgba(0, 0, 0, 0.4);
+            color: #FFFFFF;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+        body.frosted-glass.dark .meta-badge {
+            background: rgba(0, 0, 0, 0.55);
+            color: #FFE0C0;
+        }
+        body.frosted-glass .item-icon {
+            background: rgba(0, 0, 0, 0.35);
+        }
+        body.frosted-glass .item-icon .material-symbols-outlined {
+            color: #FFFFFF;
+        }
+        body.frosted-glass.dark .item-icon {
+            background: rgba(0, 0, 0, 0.45);
+        }
+        body.frosted-glass.dark .item-icon .material-symbols-outlined {
+            color: #FFC8A0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Top bar with icon only buttons + language switch -->
         <div class="top-bar">
-            <button id="langToggleBtn" class="icon-btn lang-btn" aria-label="Switch Language">
+            <button id="langToggleBtn" class="icon-btn lang-btn" data-tooltip="Switch Language">
                 <span class="material-symbols-outlined">language</span>
                 <span id="langBtnText">EN</span>
             </button>
-            <button id="darkModeToggle" class="icon-btn" aria-label="Switch Dark/Light mode">
+            <button id="darkModeToggle" class="icon-btn" data-tooltip="Dark / Light Mode">
                 <span class="material-symbols-outlined">dark_mode</span>
             </button>
-            <button id="layoutToggleBtn" class="icon-btn" aria-label="Switch List / Grid">
-                <span class="material-symbols-outlined" id="layoutIcon">view_list</span>
+            <button id="glassToggleBtn" class="icon-btn glass-btn" data-tooltip="Frosted Glass (Experimenta)">
+                <span class="material-symbols-outlined">lens_blur</span>
+            </button>
+            <button id="galleryToggleBtn" class="icon-btn mg-btn" data-tooltip="Mobile Glues Settings">
+                <span class="material-symbols-outlined">photo_library</span>
+                <span>MG</span>
             </button>
         </div>
 
-        <!-- Hero Section - teks hero dapat diklik untuk easter egg -->
         <div class="hero" id="heroEasterTrigger">
             <div class="bounce-text">
                 <h1 id="heroTitle">Shader Downloads</h1>
@@ -784,445 +1072,108 @@
             </div>
         </div>
 
-        <!-- Stats Card - TikTok Link -->
         <a href="https://www.tiktok.com/@xanderseii?_r=1&_t=ZS-96mzmKFxC35" class="stats-card" target="_blank">
             <div class="stats-left">
                 <img src="https://i.postimg.cc/T3bRyGQL/1779956959069.png" alt="TikTok Profile" class="tiktok-avatar">
                 <div class="stats-text">
-                    <div class="stats-username">
-                        Seiyant
-                        <span class="material-symbols-outlined" style="font-size: 14px;">verified</span>
-                    </div>
+                    <div class="stats-username">Seiyant <span class="material-symbols-outlined" style="font-size: 14px;">verified</span></div>
                     <div class="stats-label" id="followLabel">Follow TikTok →</div>
                 </div>
             </div>
-            <div class="stats-icon">
-                <span class="material-symbols-outlined" style="color: white; font-size: 18px;">chevron_right</span>
-            </div>
+            <div class="stats-icon"><span class="material-symbols-outlined" style="color: white; font-size: 18px;">chevron_right</span></div>
         </a>
 
-        <!-- DONATE CARD - Sociabuzz -->
         <a href="https://sociabuzz.com/seiyantthecreator" class="donate-card" target="_blank">
             <div class="donate-left">
-                <div class="donate-icon">
-                    <span class="material-symbols-outlined">favorite</span>
-                </div>
+                <div class="donate-icon"><span class="material-symbols-outlined">favorite</span></div>
                 <div class="donate-text">
-                    <div class="donate-title" id="donateTitle">
-                        Support Seiyant
-                        <span class="material-symbols-outlined" style="font-size: 16px;">volunteer_activism</span>
-                    </div>
+                    <div class="donate-title" id="donateTitle">Support Seiyant <span class="material-symbols-outlined" style="font-size: 16px;">volunteer_activism</span></div>
                     <div class="donate-sub" id="donateSub">Donate via Sociabuzz • Thank You</div>
                 </div>
             </div>
-            <div class="donate-arrow">
-                <span class="material-symbols-outlined">chevron_right</span>
-            </div>
+            <div class="donate-arrow"><span class="material-symbols-outlined">chevron_right</span></div>
         </a>
 
-        <!-- DISCLAIMER CARD - konten dinamis -->
         <div class="disclaimer-card">
             <span class="material-symbols-outlined disclaimer-icon">info</span>
             <div class="disclaimer-content">
                 <div class="disclaimer-title" id="disclaimerTitle">Disclaimer</div>
                 <div class="disclaimer-text" id="disclaimerText">
-                    <p>All shader files available here have been edited and customized by me, Seiyant. I do not claim to be the original creator of any shader. I only reconfigure and optimize them. All copyrights belong to their respective developers.</p>
-                    <p>All shader settings and configurations are free. Please do not spend your money on shader configs. Instead, consider supporting the original shader authors and developers.</p>
+                    <p>All shader files here are just edits made by me, Seiyant. I'm not the original creator of any of these shaders, and I never claim to be. I just tweak the settings to make them look a bit better and run a bit smoother. All copyrights belong to the original shader developers.</p>
+                    <p>All shader settings are free. So don't waste your money buying shader configs, show some respect and support the original developers instead.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Search Bar -->
         <div class="search-box">
             <span class="material-symbols-outlined">search</span>
             <input type="text" id="searchInput" placeholder="Search files...">
         </div>
 
-        <!-- Pagination Controls ATAS -->
         <div class="pagination-control" id="paginationTop">
-            <button class="page-btn" id="prevBtnTop">
-                <span class="material-symbols-outlined" style="font-size: 18px;">chevron_left</span> <span id="prevText">Prev</span>
-            </button>
-            <span class="page-number" id="pageIndicatorTop">Halaman 1</span>
-            <button class="page-btn" id="nextBtnTop">
-                <span id="nextText">Next</span> <span class="material-symbols-outlined" style="font-size: 18px;">chevron_right</span>
-            </button>
+            <button class="page-btn" id="prevBtnTop"><span class="material-symbols-outlined" style="font-size: 18px;">chevron_left</span> <span id="prevText">Prev</span></button>
+            <span class="page-number" id="pageIndicatorTop">Page 1</span>
+            <button class="page-btn" id="nextBtnTop"><span id="nextText">Next</span> <span class="material-symbols-outlined" style="font-size: 18px;">chevron_right</span></button>
         </div>
 
-        <!-- Daftar Download -->
         <div class="download-list" id="downloadList">
-            <a href="https://sfile.co/Pm2sLkQ3kjb" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">New Mellow</div><div class="badge-group"><span class="meta-badge">Developer: TheCMK</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
-            <a href="https://sfile.co/FdcAvQBZGWg" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">Derivative 69 & V2</div><div class="badge-group"><span class="meta-badge">Developer: HaringPro</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
-            <a href="https://sfile.co/QeXp1QFan2w" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">Derivative V3</div><div class="badge-group"><span class="meta-badge">Developer: HaringPro</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
-            <a href="https://sfile.co/6PUVt0AUDVm" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">Derivative V4</div><div class="badge-group"><span class="meta-badge">Developer: HaringPro</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
-            <a href="https://sfile.co/bgXaYQcO1o4" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">BSL Refined</div><div class="badge-group"><span class="meta-badge">Developer: CaptTatsu</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
-            <a href="https://sfile.co/Avw3evt0slw" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">E-LITE 5</div><div class="badge-group"><span class="meta-badge">Developer: Entokito</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
-            <a href="https://sfile.co/YzdJnIhUiQP" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">E-LITE 5 (waving)</div><div class="badge-group"><span class="meta-badge">Developer: Entokito</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
-            <a href="https://sfile.co/ZwCd3jKTV3t" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">Super Duper Vanilla</div><div class="badge-group"><span class="meta-badge">Developer: Eldestone</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
-            <a href="https://sfile.co/jmDMTsy0pjo" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">Complementary 5.2.2</div><div class="badge-group"><span class="meta-badge">Developer: EminGT</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
-            <a href="https://sfile.co/SDvKahlqdQg" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">E-lite shader</div><div class="badge-group"><span class="meta-badge">Developer: Entokito</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
-            <a href="https://sfile.co/2pN23LCnyL7" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">Mellow Fabulous Edit 2</div><div class="badge-group"><span class="meta-badge">Developer: TheCMK</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
-            <a href="https://sfile.co/sCBK2OXMrgz" class="download-item" target="_blank">
-                <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
-                <div class="item-content"><div class="item-title">Skylumine</div><div class="badge-group"><span class="meta-badge">Developer: MCbugsaddon</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div>
-                <span class="material-symbols-outlined arrow-icon">chevron_right</span>
-            </a>
+            <!-- 12 shader items -->
+            <a href="https://sfile.co/Pm2sLkQ3kjb" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">New Mellow</div><div class="badge-group"><span class="meta-badge">Developer: TheCMK</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
+            <a href="https://sfile.co/FdcAvQBZGWg" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">Derivative 69 & V2</div><div class="badge-group"><span class="meta-badge">Developer: HaringPro</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
+            <a href="https://sfile.co/QeXp1QFan2w" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">Derivative V3</div><div class="badge-group"><span class="meta-badge">Developer: HaringPro</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
+            <a href="https://sfile.co/6PUVt0AUDVm" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">Derivative V4</div><div class="badge-group"><span class="meta-badge">Developer: HaringPro</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
+            <a href="https://sfile.co/bgXaYQcO1o4" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">BSL Refined</div><div class="badge-group"><span class="meta-badge">Developer: CaptTatsu</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
+            <a href="https://sfile.co/Avw3evt0slw" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">E-LITE 5</div><div class="badge-group"><span class="meta-badge">Developer: Entokito</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
+            <a href="https://sfile.co/YzdJnIhUiQP" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">E-LITE 5 (waving)</div><div class="badge-group"><span class="meta-badge">Developer: Entokito</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
+            <a href="https://sfile.co/ZwCd3jKTV3t" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">Super Duper Vanilla</div><div class="badge-group"><span class="meta-badge">Developer: Eldestone</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
+            <a href="https://sfile.co/jmDMTsy0pjo" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">Complementary 5.2.2</div><div class="badge-group"><span class="meta-badge">Developer: EminGT</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
+            <a href="https://sfile.co/SDvKahlqdQg" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">E-lite shader</div><div class="badge-group"><span class="meta-badge">Developer: Entokito</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
+            <a href="https://sfile.co/2pN23LCnyL7" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">Mellow Fabulous Edit 2</div><div class="badge-group"><span class="meta-badge">Developer: TheCMK</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
+            <a href="https://sfile.co/sCBK2OXMrgz" class="download-item" target="_blank"><div class="item-icon"><span class="material-symbols-outlined">description</span></div><div class="item-content"><div class="item-title">Skylumine</div><div class="badge-group"><span class="meta-badge">Developer: MCbugsaddon</span><span class="meta-badge-new">Edited by Seiyant / SSUDUT</span></div></div><span class="material-symbols-outlined arrow-icon">chevron_right</span></a>
         </div>
 
-        <!-- Pagination Controls BAWAH -->
         <div class="pagination-control" id="paginationBottom">
-            <button class="page-btn" id="prevBtnBottom">
-                <span class="material-symbols-outlined" style="font-size: 18px;">chevron_left</span> <span id="prevTextBottom">Prev</span>
-            </button>
-            <span class="page-number" id="pageIndicatorBottom">Halaman 1</span>
-            <button class="page-btn" id="nextBtnBottom">
-                <span id="nextTextBottom">Next</span> <span class="material-symbols-outlined" style="font-size: 18px;">chevron_right</span>
-            </button>
+            <button class="page-btn" id="prevBtnBottom"><span class="material-symbols-outlined" style="font-size: 18px;">chevron_left</span> <span id="prevTextBottom">Prev</span></button>
+            <span class="page-number" id="pageIndicatorBottom">Page 1</span>
+            <button class="page-btn" id="nextBtnBottom"><span id="nextTextBottom">Next</span> <span class="material-symbols-outlined" style="font-size: 18px;">chevron_right</span></button>
         </div>
-        <div class="pagination-info" id="paginationInfo">Menampilkan 1 - 8 dari 12 shader</div>
+        <div class="pagination-info" id="paginationInfo">Showing 1 - 8 of 12 shaders</div>
 
         <div class="footer">
             <span class="material-symbols-outlined" style="font-size: 14px; vertical-align: middle;">check_circle</span> 
-            Seiyant 2026 - Secure
+            Seiyant 2026 - Nice People 69
         </div>
     </div>
 
-    <!-- Floating Action Button -->
     <div class="fab" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
         <span class="material-symbols-outlined">arrow_upward</span>
     </div>
 
     <script>
-        // ==================== EASTER EGG: klik hero -> halaman baru (overlay) berisi ? , gambar, tombol back ====================
-        function showEasterEggPage() {
-            // Cek apakah sudah ada overlay, jika sudah tidak buat lagi
-            if (document.getElementById('easterEggOverlay')) return;
-            
-            const overlay = document.createElement('div');
-            overlay.id = 'easterEggOverlay';
-            overlay.className = 'easter-egg-page';
-            
-            // Konten Halaman
-            overlay.innerHTML = `
-                <div class="egg-content">
-                    <div class="question-mark">???</div>
-                    <div class="egg-image">
-    <img src="https://i.postimg.cc/jqzHJszv/b6beb8efde7ce38d2b303f20b714bb22.jpg" alt="Secret" style="width: 100%; max-width: 180px; border-radius: 28px; box-shadow: 0 6px 16px rgba(0,0,0,0.4);">
-</div>
-                    <div class="egg-message"></div>
-                    <button class="back-button" id="easterEggBackBtn">
-                        <span class="material-symbols-outlined">arrow_back</span> Back
-                    </button>
-                </div>
-            `;
-            
-            document.body.appendChild(overlay);
-            
-            // Event listener tombol back untuk menutup
-            const backBtn = document.getElementById('easterEggBackBtn');
-            if (backBtn) {
-                backBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (overlay && overlay.remove) overlay.remove();
-                });
-            }
-            // Klik diluar konten (opsional) juga menutup, tapi agar tidak mengganggu, kita bisa biarkan hanya tombol back
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) {
-                    overlay.remove();
-                }
-            });
-        }
-        
-        // Pasang event listener ke elemen hero (teks hero + subhead)
-        const heroTrigger = document.getElementById('heroEasterTrigger');
-        if (heroTrigger) {
-            heroTrigger.style.cursor = 'pointer';
-            heroTrigger.addEventListener('click', function(e) {
-                e.stopPropagation();
-                showEasterEggPage();
-            });
-        }
-        
-        // ==================== MULTI BAHASA (ID/EN) ====================
+        // Translations (unchanged)
         const translations = {
-            id: {
-                heroTitle: "Shader Downloads",
-                heroSubhead: "Semua shader yang diedit oleh Seiyant",
-                followLabel: "Ikuti TikTok →",
-                donateTitle: "Dukung Seiyant",
-                donateSub: "Donasi via Sociabuzz • Terima Kasih",
-                disclaimerTitle: "Disclaimer",
-                disclaimerText: "<p>Semua file shader di sini cuma hasil edit dari gw, Seiyant. Gw bukan pembuat asli shadernya dan nggak pernah ngaku sebagai dev aslinya. Gw cuman nyetting tampilannya biar sedikit lebih cakep & ringan. Semua hak cipta tetep milik developer asli shader tersebut.</p><p>Semua settingan shader itu gratis. Jadi jangan keluarin uang cuma buat beli settingan shader, respect sama developernya cuy.</p>",
-                searchPlaceholder: "Cari file...",
-                prevText: "Sebelumnya",
-                nextText: "Selanjutnya",
-                pagePrefix: "Hal.",
-                showingText: "Menampilkan",
-                ofText: "dari",
-                shadersText: "shader",
-                noResultText: "Tidak ada shader yang cocok"
-            },
-            en: {
-                heroTitle: "Shader Downloads",
-                heroSubhead: "All shaders edited by Seiyant",
-                followLabel: "Follow TikTok →",
-                donateTitle: "Support Seiyant",
-                donateSub: "Donate via Sociabuzz • Thank You",
-                disclaimerTitle: "Disclaimer",
-                disclaimerText: "<p>All shader files here are just edits made by me, Seiyant. I'm not the original creator of any of these shaders, and I never claim to be. I just tweak the settings to make them look a bit better and run a bit smoother. All copyrights belong to the original shader developers.</p><p>All shader settings are free. So don't waste your money buying shader configs, show some respect and support the original developers instead.</p>",
-                searchPlaceholder: "Search files...",
-                prevText: "Prev",
-                nextText: "Next",
-                pagePrefix: "Page",
-                showingText: "Showing",
-                ofText: "of",
-                shadersText: "shaders",
-                noResultText: "No matching shaders"
-            }
+            id: { heroTitle: "Shader Downloads", heroSubhead: "Semua shader yang diedit oleh Seiyant", followLabel: "Ikuti TikTok →", donateTitle: "Dukung Seiyant", donateSub: "Donasi via Sociabuzz • Terima Kasih", disclaimerTitle: "Disclaimer", disclaimerText: "<p>Semua file shader di sini cuma hasil edit dari gw, Seiyant. Gw bukan pembuat asli shadernya dan nggak pernah ngaku sebagai dev aslinya. Gw cuman nyetting tampilannya biar sedikit lebih cakep & ringan. Semua hak cipta tetep milik developer asli shader tersebut.</p><p>Semua settingan shader itu gratis. Jadi jangan keluarin uang cuma buat beli settingan shader, respect sama developernya cuy.</p>", searchPlaceholder: "Cari file...", prevText: "Sebelumnya", nextText: "Selanjutnya", pagePrefix: "Hal.", showingText: "Menampilkan", ofText: "dari", shadersText: "shader", noResultText: "Tidak ada shader yang cocok", easterEgg: { question: "🤓😹😛", message: "🩲", button: "BALIK" }, gallery: { title: "Pengaturan Mobile Glues", sub: "Klik gambar untuk melihat ukuran penuh", close: "Tutup" } },
+            en: { heroTitle: "Shader Downloads", heroSubhead: "All shaders edited by Seiyant", followLabel: "Follow TikTok →", donateTitle: "Support Seiyant", donateSub: "Donate via Sociabuzz • Thank You", disclaimerTitle: "Disclaimer", disclaimerText: "<p>All shader files here are just edits made by me, Seiyant. I'm not the original creator of any of these shaders, and I never claim to be. I just tweak the settings to make them look a bit better and run a bit smoother. All copyrights belong to the original shader developers.</p><p>All shader settings are free. So don't waste your money buying shader configs, show some respect and support the original developers instead.</p>", searchPlaceholder: "Search files...", prevText: "Prev", nextText: "Next", pagePrefix: "Page", showingText: "Showing", ofText: "of", shadersText: "shaders", noResultText: "No matching shaders", easterEgg: { question: "😛😹🤓", message: "🩲", button: "GET OUT!" }, gallery: { title: "Mobile Glues Settings", sub: "Click image to view full size", close: "Close" } }
         };
-
-        let currentLang = 'id'; // default indonesia
-
-        function applyLanguage(lang) {
-            const t = translations[lang];
-            if (!t) return;
-            
-            document.getElementById('heroTitle').innerText = t.heroTitle;
-            document.getElementById('heroSubhead').innerText = t.heroSubhead;
-            document.getElementById('followLabel').innerText = t.followLabel;
-            document.getElementById('donateTitle').innerHTML = t.donateTitle + ' <span class="material-symbols-outlined" style="font-size: 16px;">volunteer_activism</span>';
-            document.getElementById('donateSub').innerText = t.donateSub;
-            document.getElementById('disclaimerTitle').innerText = t.disclaimerTitle;
-            document.getElementById('disclaimerText').innerHTML = t.disclaimerText;
-            document.getElementById('searchInput').placeholder = t.searchPlaceholder;
-            
-            const prevSpans = document.querySelectorAll('#prevText, #prevTextBottom');
-            const nextSpans = document.querySelectorAll('#nextText, #nextTextBottom');
-            prevSpans.forEach(span => { if(span) span.innerText = t.prevText; });
-            nextSpans.forEach(span => { if(span) span.innerText = t.nextText; });
-            
-            const langBtnSpan = document.getElementById('langBtnText');
-            if (langBtnSpan) langBtnSpan.innerText = lang === 'id' ? 'EN' : 'ID';
-            
-            updatePaginationTexts(t);
-            
-            localStorage.setItem('seiyantLang', lang);
-            currentLang = lang;
-        }
-        
-        function updatePaginationTexts(t) {
-            const pageIndicators = document.querySelectorAll('#pageIndicatorTop, #pageIndicatorBottom');
-            const currentPageNum = currentPage || 1;
-            pageIndicators.forEach(el => {
-                if (el) el.innerText = `${t.pagePrefix} ${currentPageNum}`;
-            });
-            const infoDiv = document.getElementById('paginationInfo');
-            if (infoDiv && window.currentDisplayItems) {
-                const start = (currentPage - 1) * ITEMS_PER_PAGE + 1;
-                const end = Math.min(currentPage * ITEMS_PER_PAGE, window.currentDisplayItems.length);
-                if (window.currentDisplayItems.length === 0) {
-                    infoDiv.innerText = t.noResultText;
-                } else {
-                    infoDiv.innerText = `${t.showingText} ${start} - ${end} ${t.ofText} ${window.currentDisplayItems.length} ${t.shadersText}`;
-                }
-            }
-        }
-        
-        // ==================== PAGINATION & SEARCH ====================
+        let currentLang = 'en';
+        let currentPage = 1;
+        let currentDisplayItems = [];
         const allItemsOriginal = Array.from(document.querySelectorAll('#downloadList .download-item'));
         const ITEMS_PER_PAGE = 8;
-        let currentPage = 1;
-        let currentDisplayItems = [...allItemsOriginal];
-        
-        function renderPageWithCustomList(itemList, page) {
-            if (!itemList) itemList = currentDisplayItems || [];
-            const total = Math.ceil(itemList.length / ITEMS_PER_PAGE);
-            if (page < 1) page = 1;
-            if (page > total && total > 0) page = total;
-            if (total === 0) page = 1;
-            
-            const start = (page - 1) * ITEMS_PER_PAGE;
-            const end = start + ITEMS_PER_PAGE;
-            
-            allItemsOriginal.forEach(it => { it.style.display = 'none'; });
-            for (let i = start; i < end && i < itemList.length; i++) {
-                itemList[i].style.display = '';
-            }
-            
-            currentPage = page;
-            
-            const t = translations[currentLang];
-            const pagePrefix = t ? t.pagePrefix : 'Halaman';
-            const pageIndicatorTop = document.getElementById('pageIndicatorTop');
-            const pageIndicatorBottom = document.getElementById('pageIndicatorBottom');
-            if (pageIndicatorTop) pageIndicatorTop.innerText = `${pagePrefix} ${page}`;
-            if (pageIndicatorBottom) pageIndicatorBottom.innerText = `${pagePrefix} ${page}`;
-            
-            const prevBtns = [document.getElementById('prevBtnTop'), document.getElementById('prevBtnBottom')];
-            const nextBtns = [document.getElementById('nextBtnTop'), document.getElementById('nextBtnBottom')];
-            prevBtns.forEach(btn => { if (btn) { if (page === 1) btn.classList.add('disabled'); else btn.classList.remove('disabled'); } });
-            nextBtns.forEach(btn => { if (btn) { if (page === total) btn.classList.add('disabled'); else btn.classList.remove('disabled'); } });
-            
-            const infoDiv = document.getElementById('paginationInfo');
-            if (infoDiv && t) {
-                if (itemList.length === 0) {
-                    infoDiv.innerText = t.noResultText;
-                } else {
-                    infoDiv.innerText = `${t.showingText} ${start+1} - ${Math.min(end, itemList.length)} ${t.ofText} ${itemList.length} ${t.shadersText}`;
-                }
-            }
-        }
-        
-        function nextPage() {
-            const total = Math.ceil(currentDisplayItems.length / ITEMS_PER_PAGE);
-            if (currentPage < total) {
-                renderPageWithCustomList(currentDisplayItems, currentPage + 1);
-                window.scrollTo({ top: document.querySelector('.pagination-control').offsetTop - 80, behavior: 'smooth' });
-            }
-        }
-        
-        function prevPage() {
-            if (currentPage > 1) {
-                renderPageWithCustomList(currentDisplayItems, currentPage - 1);
-                window.scrollTo({ top: document.querySelector('.pagination-control').offsetTop - 80, behavior: 'smooth' });
-            }
-        }
-        
-        document.getElementById('prevBtnTop')?.addEventListener('click', prevPage);
-        document.getElementById('nextBtnTop')?.addEventListener('click', nextPage);
-        document.getElementById('prevBtnBottom')?.addEventListener('click', prevPage);
-        document.getElementById('nextBtnBottom')?.addEventListener('click', nextPage);
-        
-        const searchInputElem = document.getElementById('searchInput');
-        searchInputElem.addEventListener('input', function(e) {
-            const keyword = e.target.value.toLowerCase();
-            const matched = [];
-            allItemsOriginal.forEach(item => {
-                const title = item.querySelector('.item-title').innerText.toLowerCase();
-                if (keyword === '' || title.includes(keyword)) {
-                    matched.push(item);
-                }
-            });
-            currentDisplayItems = matched;
-            renderPageWithCustomList(currentDisplayItems, 1);
-        });
-        
-        currentDisplayItems = [...allItemsOriginal];
-        renderPageWithCustomList(currentDisplayItems, 1);
-        
-        // ==================== DARK MODE ====================
-        const darkToggle = document.getElementById('darkModeToggle');
-        function applyDarkMode(isDark) {
-            if (isDark) {
-                document.body.classList.add('dark');
-                localStorage.setItem('seiyantDarkMode', 'enabled');
-            } else {
-                document.body.classList.remove('dark');
-                localStorage.setItem('seiyantDarkMode', 'disabled');
-            }
-        }
-        const storedMode = localStorage.getItem('seiyantDarkMode');
-        if (storedMode === 'enabled') applyDarkMode(true);
-        else if (storedMode === 'disabled') applyDarkMode(false);
-        else {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            applyDarkMode(prefersDark);
-        }
-        darkToggle.addEventListener('click', () => {
-            const isDarkNow = document.body.classList.contains('dark');
-            applyDarkMode(!isDarkNow);
-        });
-        
-        // ==================== LAYOUT TOGGLE (default grid) ====================
-        const downloadContainer = document.getElementById('downloadList');
-        const layoutToggleBtn = document.getElementById('layoutToggleBtn');
-        const layoutIconSpan = document.getElementById('layoutIcon');
-        let isListMode = false;
-        
-        function setLayoutMode(listMode) {
-            if (listMode) {
-                downloadContainer.classList.add('list-mode');
-                layoutIconSpan.textContent = 'grid_view';
-                isListMode = true;
-                localStorage.setItem('seiyantLayout', 'list');
-            } else {
-                downloadContainer.classList.remove('list-mode');
-                layoutIconSpan.textContent = 'view_list';
-                isListMode = false;
-                localStorage.setItem('seiyantLayout', 'grid');
-            }
-        }
-        const savedLayoutMode = localStorage.getItem('seiyantLayout');
-        if (savedLayoutMode === 'list') setLayoutMode(true);
-        else setLayoutMode(false);
-        
-        layoutToggleBtn.addEventListener('click', () => {
-            setLayoutMode(!isListMode);
-        });
-        
-        // ==================== BAHASA ====================
-        const langToggleBtn = document.getElementById('langToggleBtn');
-        const savedLang = localStorage.getItem('seiyantLang');
-        if (savedLang === 'en') {
-            currentLang = 'en';
-            applyLanguage('en');
-        } else {
-            applyLanguage('id');
-        }
-        
-        langToggleBtn.addEventListener('click', () => {
-            const newLang = currentLang === 'id' ? 'en' : 'id';
-            applyLanguage(newLang);
-            renderPageWithCustomList(currentDisplayItems, currentPage);
-        });
-        
-        window.currentDisplayItems = currentDisplayItems;
-        window.renderPageWithCustomList = renderPageWithCustomList;
+        function renderPageWithCustomList(itemList, page) { if (!itemList) itemList = currentDisplayItems; const total = Math.ceil(itemList.length / ITEMS_PER_PAGE); if (page < 1) page = 1; if (page > total && total > 0) page = total; if (total === 0) page = 1; const start = (page - 1) * ITEMS_PER_PAGE; const end = start + ITEMS_PER_PAGE; allItemsOriginal.forEach(it => it.style.display = 'none'); for (let i = start; i < end && i < itemList.length; i++) itemList[i].style.display = ''; currentPage = page; const t = translations[currentLang]; const prefix = t ? t.pagePrefix : 'Page'; document.getElementById('pageIndicatorTop').innerText = `${prefix} ${page}`; document.getElementById('pageIndicatorBottom').innerText = `${prefix} ${page}`; const prevBtns = [document.getElementById('prevBtnTop'), document.getElementById('prevBtnBottom')]; const nextBtns = [document.getElementById('nextBtnTop'), document.getElementById('nextBtnBottom')]; prevBtns.forEach(btn => { if (page === 1) btn.classList.add('disabled'); else btn.classList.remove('disabled'); }); nextBtns.forEach(btn => { if (page === total) btn.classList.add('disabled'); else btn.classList.remove('disabled'); }); const info = document.getElementById('paginationInfo'); if (info && t) { if (itemList.length === 0) info.innerText = t.noResultText; else info.innerText = `${t.showingText} ${start+1} - ${Math.min(end, itemList.length)} ${t.ofText} ${itemList.length} ${t.shadersText}`; } }
+        function applyLanguage(lang) { const t = translations[lang]; if (!t) return; document.getElementById('heroTitle').innerText = t.heroTitle; document.getElementById('heroSubhead').innerText = t.heroSubhead; document.getElementById('followLabel').innerText = t.followLabel; document.getElementById('donateTitle').innerHTML = t.donateTitle + ' <span class="material-symbols-outlined" style="font-size: 16px;">volunteer_activism</span>'; document.getElementById('donateSub').innerText = t.donateSub; document.getElementById('disclaimerTitle').innerText = t.disclaimerTitle; document.getElementById('disclaimerText').innerHTML = t.disclaimerText; document.getElementById('searchInput').placeholder = t.searchPlaceholder; document.querySelectorAll('#prevText, #prevTextBottom').forEach(el => el.innerText = t.prevText); document.querySelectorAll('#nextText, #nextTextBottom').forEach(el => el.innerText = t.nextText); document.getElementById('langBtnText').innerText = lang === 'id' ? 'EN' : 'ID'; renderPageWithCustomList(currentDisplayItems, currentPage); localStorage.setItem('seiyantLang', lang); currentLang = lang; }
+        function showEasterEggPage() { if (document.getElementById('easterEggOverlay')) return; const t = translations[currentLang].easterEgg; const overlay = document.createElement('div'); overlay.id = 'easterEggOverlay'; overlay.className = 'easter-egg-page'; overlay.innerHTML = `<div class="egg-content"><div class="question-mark">${t.question}</div><div class="egg-image"><img src="https://i.postimg.cc/jqzHJszv/b6beb8efde7ce38d2b303f20b714bb22.jpg" alt="Secret"></div><div class="egg-message">${t.message}</div><button class="back-button" id="easterEggBackBtn"><span class="material-symbols-outlined">arrow_back</span>${t.button}</button></div>`; document.body.appendChild(overlay); document.getElementById('easterEggBackBtn').addEventListener('click', () => overlay.remove()); overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); }); }
+        function showGallery() { if (document.getElementById('galleryModal')) return; const t = translations[currentLang].gallery; const galleryImages = [ { url: "https://i.postimg.cc/0NXjC0Mb/Screenshot-20260531-120321.jpg", title: "Mobile Glues 1.3.4 - Settings" }, { url: "https://i.postimg.cc/jj32h4wD/Screenshot-20260531-120345.jpg", title: "Mobile Glues 1.3.4 - Display" }, { url: "https://i.postimg.cc/CKr54sBZ/Screenshot-20260531-120409.jpg", title: "Mobile Glues 1.3.3 - Main" } ]; const modal = document.createElement('div'); modal.id = 'galleryModal'; modal.className = 'gallery-modal'; let imagesHtml = ''; galleryImages.forEach(img => { imagesHtml += `<img src="${img.url}" class="gallery-img" alt="${img.title}" title="${img.title}">`; }); modal.innerHTML = `<div class="gallery-content"><div class="gallery-title">${t.title}</div><div class="gallery-sub">${t.sub}</div><div class="gallery-grid">${imagesHtml}</div><button class="gallery-close" id="galleryCloseBtn">${t.close}</button></div>`; document.body.appendChild(modal); document.querySelectorAll('.gallery-img').forEach(img => img.addEventListener('click', () => window.open(img.src, '_blank'))); document.getElementById('galleryCloseBtn').addEventListener('click', () => modal.remove()); modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); }); }
+        document.getElementById('heroEasterTrigger').addEventListener('click', showEasterEggPage);
+        document.getElementById('galleryToggleBtn').addEventListener('click', showGallery);
+        document.getElementById('searchInput').addEventListener('input', (e) => { const keyword = e.target.value.toLowerCase(); currentDisplayItems = allItemsOriginal.filter(item => item.querySelector('.item-title').innerText.toLowerCase().includes(keyword)); renderPageWithCustomList(currentDisplayItems, 1); });
+        document.getElementById('prevBtnTop')?.addEventListener('click', () => { if (currentPage > 1) renderPageWithCustomList(currentDisplayItems, currentPage - 1); });
+        document.getElementById('nextBtnTop')?.addEventListener('click', () => { const total = Math.ceil(currentDisplayItems.length / ITEMS_PER_PAGE); if (currentPage < total) renderPageWithCustomList(currentDisplayItems, currentPage + 1); });
+        document.getElementById('prevBtnBottom')?.addEventListener('click', () => { if (currentPage > 1) renderPageWithCustomList(currentDisplayItems, currentPage - 1); });
+        document.getElementById('nextBtnBottom')?.addEventListener('click', () => { const total = Math.ceil(currentDisplayItems.length / ITEMS_PER_PAGE); if (currentPage < total) renderPageWithCustomList(currentDisplayItems, currentPage + 1); });
+        const darkToggle = document.getElementById('darkModeToggle'); function applyDarkMode(isDark) { if (isDark) document.body.classList.add('dark'); else document.body.classList.remove('dark'); localStorage.setItem('seiyantDarkMode', isDark ? 'enabled' : 'disabled'); } if (localStorage.getItem('seiyantDarkMode') === 'enabled') applyDarkMode(true); darkToggle.addEventListener('click', () => applyDarkMode(!document.body.classList.contains('dark')));
+        const glassToggle = document.getElementById('glassToggleBtn'); function applyGlassMode(isGlass) { if (isGlass) document.body.classList.add('frosted-glass'); else document.body.classList.remove('frosted-glass'); localStorage.setItem('seiyantGlassMode', isGlass ? 'enabled' : 'disabled'); } if (localStorage.getItem('seiyantGlassMode') === 'enabled') applyGlassMode(true); glassToggle.addEventListener('click', () => applyGlassMode(!document.body.classList.contains('frosted-glass')));
+        const savedLang = localStorage.getItem('seiyantLang'); currentDisplayItems = [...allItemsOriginal]; applyLanguage(savedLang === 'id' ? 'id' : 'en'); document.getElementById('langToggleBtn').addEventListener('click', () => applyLanguage(currentLang === 'id' ? 'en' : 'id'));
     </script>
 </body>
 </html>
