@@ -54,8 +54,12 @@ function renderPageWithCustomList(itemList, page) {
     if (total === 0) page = 1; 
     const start = (page - 1) * ITEMS_PER_PAGE; 
     const end = start + ITEMS_PER_PAGE; 
+    // Sembunyikan semua item terlebih dahulu
     allItemsOriginal.forEach(it => it.style.display = 'none'); 
-    for (let i = start; i < end && i < itemList.length; i++) itemList[i].style.display = ''; 
+    // Tampilkan hanya item yang sesuai range
+    for (let i = start; i < end && i < itemList.length; i++) {
+        if (itemList[i]) itemList[i].style.display = '';
+    }
     currentPage = page; 
     const t = translations[currentLang]; 
     const prefix = t ? t.pagePrefix : 'Page'; 
@@ -68,7 +72,7 @@ function renderPageWithCustomList(itemList, page) {
         else btn.classList.remove('disabled'); 
     }); 
     nextBtns.forEach(btn => { 
-        if (page === total) btn.classList.add('disabled'); 
+        if (page === total || total === 0) btn.classList.add('disabled'); 
         else btn.classList.remove('disabled'); 
     }); 
     const info = document.getElementById('paginationInfo'); 
@@ -179,8 +183,11 @@ function applyDarkMode(isDark) {
 if (localStorage.getItem('seiyantDarkMode') === 'enabled') applyDarkMode(true); 
 darkToggle.addEventListener('click', () => applyDarkMode(!document.body.classList.contains('dark')));
 
-// Initialize
+// Initialize - Pastikan hanya menampilkan 8 item pertama saat load
 const savedLang = localStorage.getItem('seiyantLang'); 
 currentDisplayItems = [...allItemsOriginal]; 
 applyLanguage(savedLang === 'id' ? 'id' : 'en'); 
 document.getElementById('langToggleBtn').addEventListener('click', () => applyLanguage(currentLang === 'id' ? 'en' : 'id'));
+
+// Render halaman pertama dengan benar (hanya 8 item)
+renderPageWithCustomList(currentDisplayItems, 1);
