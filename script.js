@@ -44,7 +44,7 @@ let currentLang = 'en';
 let currentPage = 1;
 let currentDisplayItems = [];
 const allItemsOriginal = Array.from(document.querySelectorAll('#downloadList .download-item'));
-const ITEMS_PER_PAGE = 8;
+const ITEMS_PER_PAGE = 5; // DIUBAH MENJADI 5
 
 function renderPageWithCustomList(itemList, page) { 
     if (!itemList) itemList = currentDisplayItems; 
@@ -54,17 +54,18 @@ function renderPageWithCustomList(itemList, page) {
     if (total === 0) page = 1; 
     const start = (page - 1) * ITEMS_PER_PAGE; 
     const end = start + ITEMS_PER_PAGE; 
-    // Sembunyikan semua item terlebih dahulu
+    
     allItemsOriginal.forEach(it => it.style.display = 'none'); 
-    // Tampilkan hanya item yang sesuai range
     for (let i = start; i < end && i < itemList.length; i++) {
-        if (itemList[i]) itemList[i].style.display = '';
+        if (itemList[i]) itemList[i].style.display = 'flex';
     }
+    
     currentPage = page; 
     const t = translations[currentLang]; 
     const prefix = t ? t.pagePrefix : 'Page'; 
     document.getElementById('pageIndicatorTop').innerText = `${prefix} ${page}`; 
     document.getElementById('pageIndicatorBottom').innerText = `${prefix} ${page}`; 
+    
     const prevBtns = [document.getElementById('prevBtnTop'), document.getElementById('prevBtnBottom')]; 
     const nextBtns = [document.getElementById('nextBtnTop'), document.getElementById('nextBtnBottom')]; 
     prevBtns.forEach(btn => { 
@@ -75,6 +76,7 @@ function renderPageWithCustomList(itemList, page) {
         if (page === total || total === 0) btn.classList.add('disabled'); 
         else btn.classList.remove('disabled'); 
     }); 
+    
     const info = document.getElementById('paginationInfo'); 
     if (info && t) { 
         if (itemList.length === 0) info.innerText = t.noResultText; 
@@ -158,16 +160,13 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
 document.getElementById('prevBtnTop')?.addEventListener('click', () => { 
     if (currentPage > 1) renderPageWithCustomList(currentDisplayItems, currentPage - 1); 
 });
-
 document.getElementById('nextBtnTop')?.addEventListener('click', () => { 
     const total = Math.ceil(currentDisplayItems.length / ITEMS_PER_PAGE); 
     if (currentPage < total) renderPageWithCustomList(currentDisplayItems, currentPage + 1); 
 });
-
 document.getElementById('prevBtnBottom')?.addEventListener('click', () => { 
     if (currentPage > 1) renderPageWithCustomList(currentDisplayItems, currentPage - 1); 
 });
-
 document.getElementById('nextBtnBottom')?.addEventListener('click', () => { 
     const total = Math.ceil(currentDisplayItems.length / ITEMS_PER_PAGE); 
     if (currentPage < total) renderPageWithCustomList(currentDisplayItems, currentPage + 1); 
@@ -183,11 +182,11 @@ function applyDarkMode(isDark) {
 if (localStorage.getItem('seiyantDarkMode') === 'enabled') applyDarkMode(true); 
 darkToggle.addEventListener('click', () => applyDarkMode(!document.body.classList.contains('dark')));
 
-// Initialize - Pastikan hanya menampilkan 8 item pertama saat load
+// Initialize
 const savedLang = localStorage.getItem('seiyantLang'); 
 currentDisplayItems = [...allItemsOriginal]; 
 applyLanguage(savedLang === 'id' ? 'id' : 'en'); 
 document.getElementById('langToggleBtn').addEventListener('click', () => applyLanguage(currentLang === 'id' ? 'en' : 'id'));
 
-// Render halaman pertama dengan benar (hanya 8 item)
+// Render first page with 5 items
 renderPageWithCustomList(currentDisplayItems, 1);
