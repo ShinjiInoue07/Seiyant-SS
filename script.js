@@ -128,23 +128,23 @@ const translations = {
     }
 };
 
-// Shader Data
+// Shader Data - SEMUA teks "SSUDUT" telah dihapus
 const shadersData = [
     { title: "Derivative NEXT", developer: "HaringPro", editor: "Seiyant", url: "https://sfile.co/Im1nop0MVx5" },
     { title: "Derivative Polished", developer: "HaringPro", editor: "Seiyant", url: "https://sfile.co/YHtsYvg7jJv" },
     { title: "Comp Unbound Update", developer: "EminGT", editor: "Seiyant", url: "https://sfile.co/q7JvMkYV9Us" },
-    { title: "New Mellow", developer: "TheCMK", editor: "Seiyant / SSUDUT", url: "https://sfile.co/Pm2sLkQ3kjb" },
-    { title: "Derivative 69 & V2", developer: "HaringPro", editor: "Seiyant / SSUDUT", url: "https://sfile.co/QeXp1QFan2w" },
-    { title: "Derivative V3", developer: "HaringPro", editor: "Seiyant / SSUDUT", url: "https://sfile.co/6PUVt0AUDVm" },
-    { title: "Derivative V4", developer: "HaringPro", editor: "Seiyant / SSUDUT", url: "https://sfile.co/bgXaYQcO1o4" },
-    { title: "BSL Refined", developer: "CaptTatsu", editor: "Seiyant / SSUDUT", url: "https://sfile.co/Avw3evt0slw" },
-    { title: "E-LITE 5", developer: "Entokito", editor: "Seiyant / SSUDUT", url: "https://sfile.co/YzdJnIhUiQP" },
-    { title: "E-LITE 5 (waving)", developer: "Entokito", editor: "Seiyant / SSUDUT", url: "https://sfile.co/ZwCd3jKTV3t" },
-    { title: "Super Duper Vanilla", developer: "Eldestone", editor: "Seiyant / SSUDUT", url: "https://sfile.co/jmDMTsy0pjo" },
-    { title: "Complementary 5.2.2", developer: "EminGT", editor: "Seiyant / SSUDUT", url: "https://sfile.co/SDvKahlqdQg" },
-    { title: "E-lite shader", developer: "Entokito", editor: "Seiyant / SSUDUT", url: "https://sfile.co/2pN23LCnyL7" },
-    { title: "Mellow Fabulous Edit 2", developer: "TheCMK", editor: "Seiyant / SSUDUT", url: "https://sfile.co/sCBK2OXMrgz" },
-    { title: "Skylumine", developer: "MCbugsaddon", editor: "Seiyant / SSUDUT", url: "https://sfile.co/2pN23LCnyL7" }
+    { title: "New Mellow", developer: "TheCMK", editor: "Seiyant", url: "https://sfile.co/Pm2sLkQ3kjb" },
+    { title: "Derivative 69 & V2", developer: "HaringPro", editor: "Seiyant", url: "https://sfile.co/QeXp1QFan2w" },
+    { title: "Derivative V3", developer: "HaringPro", editor: "Seiyant", url: "https://sfile.co/6PUVt0AUDVm" },
+    { title: "Derivative V4", developer: "HaringPro", editor: "Seiyant", url: "https://sfile.co/bgXaYQcO1o4" },
+    { title: "BSL Refined", developer: "CaptTatsu", editor: "Seiyant", url: "https://sfile.co/Avw3evt0slw" },
+    { title: "E-LITE 5", developer: "Entokito", editor: "Seiyant", url: "https://sfile.co/YzdJnIhUiQP" },
+    { title: "E-LITE 5 (waving)", developer: "Entokito", editor: "Seiyant", url: "https://sfile.co/ZwCd3jKTV3t" },
+    { title: "Super Duper Vanilla", developer: "Eldestone", editor: "Seiyant", url: "https://sfile.co/jmDMTsy0pjo" },
+    { title: "Complementary 5.2.2", developer: "EminGT", editor: "Seiyant", url: "https://sfile.co/SDvKahlqdQg" },
+    { title: "E-lite shader", developer: "Entokito", editor: "Seiyant", url: "https://sfile.co/2pN23LCnyL7" },
+    { title: "Mellow Fabulous Edit 2", developer: "TheCMK", editor: "Seiyant", url: "https://sfile.co/sCBK2OXMrgz" },
+    { title: "Skylumine", developer: "MCbugsaddon", editor: "Seiyant", url: "https://sfile.co/2pN23LCnyL7" }
 ];
 
 let currentLang = 'en';
@@ -159,11 +159,12 @@ function buildShaderElements() {
     const container = document.getElementById('downloadList');
     container.innerHTML = '';
     allShadersElements = [];
-    shadersData.forEach((shader) => {
+    shadersData.forEach((shader, index) => {
         const item = document.createElement('a');
         item.href = shader.url;
         item.className = 'download-item';
         item.target = '_blank';
+        item.style.animationDelay = `${0.05 + (index * 0.05)}s`;
         item.innerHTML = `
             <div class="item-icon"><span class="material-symbols-outlined">description</span></div>
             <div class="item-content">
@@ -274,12 +275,14 @@ function switchTab(tab) {
     const modpacksTab = document.getElementById('modpacksTabBtn');
     const downloadList = document.getElementById('downloadList');
     const comingSoon = document.getElementById('comingSoonArea');
+    const mainContent = document.querySelector('.main-content');
     
     if (tab === 'shaders') {
         shadersTab.classList.add('active');
         modpacksTab.classList.remove('active');
         downloadList.style.display = 'flex';
         comingSoon.style.display = 'none';
+        mainContent.classList.remove('modpacks-active');
         currentDisplayItems = [...allShadersElements];
         currentPage = 1;
         renderPage();
@@ -289,6 +292,7 @@ function switchTab(tab) {
         shadersTab.classList.remove('active');
         downloadList.style.display = 'none';
         comingSoon.style.display = 'block';
+        mainContent.classList.add('modpacks-active');
     }
 }
 
