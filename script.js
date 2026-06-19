@@ -3,6 +3,8 @@ const translations = {
     en: {
         heroTitle: "Shader Downloads",
         heroSubhead: "All shaders edited by Seiyant",
+        modpackHeroTitle: "Modpack Downloads",
+        modpackHeroSubhead: "Modpack Tested by Seiyant",
         followLabel: "Follow TikTok →",
         donateTitle: "Support Seiyant",
         donateSub: "Donate via Sociabuzz",
@@ -24,6 +26,8 @@ const translations = {
     id: {
         heroTitle: "Shader Downloads",
         heroSubhead: "Semua shader yang diedit oleh Seiyant",
+        modpackHeroTitle: "Download Modpack",
+        modpackHeroSubhead: "Modpack Diuji oleh Seiyant",
         followLabel: "Ikuti TikTok →",
         donateTitle: "Dukung Seiyant",
         donateSub: "Donasi via Sociabuzz",
@@ -45,6 +49,8 @@ const translations = {
     cn: {
         heroTitle: "光影下载",
         heroSubhead: "由 Seiyant 编辑的所有光影",
+        modpackHeroTitle: "模组包下载",
+        modpackHeroSubhead: "由 Seiyant 测试的模组包",
         followLabel: "关注 TikTok →",
         donateTitle: "支持 Seiyant",
         donateSub: "通过 Sociabuzz 捐赠",
@@ -66,6 +72,8 @@ const translations = {
     ph: {
         heroTitle: "Mga Shader Download",
         heroSubhead: "Lahat ng shader na na-edit ni Seiyant",
+        modpackHeroTitle: "Mga Modpack Download",
+        modpackHeroSubhead: "Modpack Sinubukan ni Seiyant",
         followLabel: "I-follow ang TikTok →",
         donateTitle: "Suportahan si Seiyant",
         donateSub: "Mag-donate sa Sociabuzz",
@@ -87,6 +95,8 @@ const translations = {
     vn: {
         heroTitle: "Tải Shader",
         heroSubhead: "Tất cả shader được chỉnh sửa bởi Seiyant",
+        modpackHeroTitle: "Tải Modpack",
+        modpackHeroSubhead: "Modpack Được Kiểm Tra bởi Seiyant",
         followLabel: "Theo dõi TikTok →",
         donateTitle: "Ủng hộ Seiyant",
         donateSub: "Donate qua Sociabuzz",
@@ -108,6 +118,8 @@ const translations = {
     ru: {
         heroTitle: "Загрузка шейдеров",
         heroSubhead: "Все шейдеры отредактированы Seiyant",
+        modpackHeroTitle: "Загрузка модпаков",
+        modpackHeroSubhead: "Модпаки Протестированы Seiyant",
         followLabel: "Подписаться на TikTok →",
         donateTitle: "Поддержать Seiyant",
         donateSub: "Пожертвовать через Sociabuzz",
@@ -247,8 +259,9 @@ function applyLanguage(lang) {
     
     currentLang = lang;
     
-    document.getElementById('heroTitle').innerText = t.heroTitle;
-    document.getElementById('heroSubhead').innerText = t.heroSubhead;
+    // Update hero based on current tab
+    updateHeroText();
+    
     document.getElementById('followLabel').innerText = t.followLabel;
     document.getElementById('donateTitle').innerHTML = t.donateTitle;
     document.getElementById('donateSub').innerText = t.donateSub;
@@ -269,20 +282,49 @@ function applyLanguage(lang) {
     localStorage.setItem('seiyantLang', lang);
 }
 
+function updateHeroText() {
+    const t = translations[currentLang];
+    if (!t) return;
+    
+    const heroTitle = document.getElementById('heroTitle');
+    const heroSubhead = document.getElementById('heroSubhead');
+    
+    if (currentTab === 'shaders') {
+        heroTitle.innerText = t.heroTitle;
+        heroSubhead.innerText = t.heroSubhead;
+        document.querySelector('.main-content').classList.remove('modpacks-active');
+    } else {
+        heroTitle.innerText = t.modpackHeroTitle;
+        heroSubhead.innerText = t.modpackHeroSubhead;
+        document.querySelector('.main-content').classList.add('modpacks-active');
+    }
+}
+
 function switchTab(tab) {
     currentTab = tab;
     const shadersTab = document.getElementById('shadersTabBtn');
     const modpacksTab = document.getElementById('modpacksTabBtn');
     const downloadList = document.getElementById('downloadList');
     const comingSoon = document.getElementById('comingSoonArea');
-    const mainContent = document.querySelector('.main-content');
+    const disclaimerCard = document.getElementById('disclaimerCard');
+    const searchBox = document.querySelector('.search-box');
+    const paginationTop = document.getElementById('paginationTop');
+    const paginationBottom = document.getElementById('paginationBottom');
+    const paginationInfo = document.getElementById('paginationInfo');
+    
+    // Update hero text
+    updateHeroText();
     
     if (tab === 'shaders') {
         shadersTab.classList.add('active');
         modpacksTab.classList.remove('active');
         downloadList.style.display = 'flex';
         comingSoon.style.display = 'none';
-        mainContent.classList.remove('modpacks-active');
+        disclaimerCard.style.display = 'block';
+        searchBox.style.display = 'flex';
+        paginationTop.style.display = 'flex';
+        paginationBottom.style.display = 'flex';
+        paginationInfo.style.display = 'block';
         currentDisplayItems = [...allShadersElements];
         currentPage = 1;
         renderPage();
@@ -292,7 +334,11 @@ function switchTab(tab) {
         shadersTab.classList.remove('active');
         downloadList.style.display = 'none';
         comingSoon.style.display = 'block';
-        mainContent.classList.add('modpacks-active');
+        disclaimerCard.style.display = 'none';
+        searchBox.style.display = 'none';
+        paginationTop.style.display = 'none';
+        paginationBottom.style.display = 'none';
+        paginationInfo.style.display = 'none';
     }
 }
 

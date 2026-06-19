@@ -578,9 +578,11 @@ body.dark .page-number {
     color: #C08888;
 }
 
-/* Hide pagination on Modpacks tab */
+/* Modpacks active - hide shaders specific elements */
 .modpacks-active .pagination-control,
-.modpacks-active .pagination-info {
+.modpacks-active .pagination-info,
+.modpacks-active .search-box,
+.modpacks-active #disclaimerCard {
     display: none !important;
 }
 
