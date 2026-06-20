@@ -471,6 +471,20 @@ body.dark .disclaimer-text {
     color: #C8A8A8;
 }
 
+/* Modpack Disclaimer - always expanded */
+.modpack-disclaimer-card .disclaimer-text {
+    max-height: 300px;
+    margin-top: 8px;
+}
+
+.modpack-disclaimer-card .disclaimer-text p {
+    margin-bottom: 6px;
+}
+
+.modpack-disclaimer-card .disclaimer-text p:last-child {
+    margin-bottom: 0;
+}
+
 /* Search Box with bounce */
 .search-box {
     background: #FFFFFF;
@@ -593,6 +607,12 @@ body.dark .page-number {
     gap: 12px;
 }
 
+.modpack-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .download-item {
     background: #FFFFFF;
     border-radius: 24px;
@@ -661,21 +681,60 @@ body.dark .item-icon {
 
 .item-icon .material-symbols-outlined { font-size: 26px; color: #C62828; transition: color 0.2s ease; }
 .item-content { flex: 1; }
-.item-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: #1C1B1F; transition: color 0.2s ease; }
+
+.item-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #1C1B1F;
+    transition: color 0.2s ease;
+}
+
 .download-item:hover .item-title { color: #C62828; }
 body.dark .item-title { color: #F0E0E0; }
 body.dark .download-item:hover .item-title { color: #FF8A80; }
 
+/* Modpack title - larger and bolder */
+.modpack-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+@media (max-width: 600px) {
+    .modpack-title {
+        font-size: 17px;
+    }
+}
+
+.item-subtitle {
+    font-size: 12px;
+    color: #8B5A5A;
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+body.dark .item-subtitle {
+    color: #C8A0A0;
+}
+
+/* Badge Group - each badge on its own row */
 .badge-group {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    width: 100%;
 }
 
 .badge-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+    display: block;
+    width: 100%;
+}
+
+.badge-row .meta-badge,
+.badge-row .meta-badge-new {
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .meta-badge {
@@ -868,7 +927,14 @@ body.dark .footer {
     .tab-btn .material-symbols-outlined { font-size: 16px; }
     .download-item { padding: 12px 14px; }
     .item-title { font-size: 14px; }
+    .modpack-title { font-size: 17px; }
+    .item-subtitle { font-size: 11px; }
     .bottom-bar { bottom: 12px; }
     .combined-item { padding: 12px 16px; }
     .tiktok-avatar, .support-icon { width: 40px; height: 40px; }
+    .badge-row .meta-badge,
+    .badge-row .meta-badge-new {
+        font-size: 9px;
+        padding: 2px 8px;
+    }
 }
