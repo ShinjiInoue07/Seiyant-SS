@@ -1,10 +1,8 @@
 // Complete Translations (6 languages)
 const translations = {
     en: {
-        heroTitle: "Shader Downloads",
         heroSubhead: "All shaders edited by Seiyant",
-        modpackHeroTitle: "Modpack Downloads",
-        modpackHeroSubhead: "Modpack Tested by Seiyant",
+        modpackHeroSubhead: "Modpack used by Seiyant",
         followLabel: "Follow TikTok →",
         donateTitle: "Support Seiyant",
         donateSub: "Donate via Sociabuzz",
@@ -24,6 +22,8 @@ const translations = {
         langName: "EN",
         readBtn: "Read",
         closeBtn: "Close",
+        headerShaders: "Shader Downloads",
+        headerModpacks: "Modpack Downloads",
         // Modpack translations
         modpack1Title: "Main Modpack",
         modpack1Subtitle: "This is the modpack I use to create Minecraft content.",
@@ -34,10 +34,8 @@ const translations = {
         badgeBy: "by Seiyant"
     },
     id: {
-        heroTitle: "Shader Downloads",
         heroSubhead: "Semua shader yang diedit oleh Seiyant",
-        modpackHeroTitle: "Download Modpack",
-        modpackHeroSubhead: "Modpack Diuji oleh Seiyant",
+        modpackHeroSubhead: "Modpack yang dipake Seiyant",
         followLabel: "Ikuti TikTok →",
         donateTitle: "Dukung Seiyant",
         donateSub: "Donasi via Sociabuzz",
@@ -57,6 +55,8 @@ const translations = {
         langName: "ID",
         readBtn: "Baca",
         closeBtn: "Tutup",
+        headerShaders: "Download Shader",
+        headerModpacks: "Download Modpack",
         // Modpack translations
         modpack1Title: "Modpack Utama",
         modpack1Subtitle: "Ini modpack yang gw pake buat bikin konten Minecraft.",
@@ -67,10 +67,8 @@ const translations = {
         badgeBy: "by Seiyant"
     },
     cn: {
-        heroTitle: "光影下载",
         heroSubhead: "由 Seiyant 编辑的所有光影",
-        modpackHeroTitle: "模组包下载",
-        modpackHeroSubhead: "由 Seiyant 测试的模组包",
+        modpackHeroSubhead: "Seiyant 使用的模组包",
         followLabel: "关注 TikTok →",
         donateTitle: "支持 Seiyant",
         donateSub: "通过 Sociabuzz 捐赠",
@@ -90,6 +88,8 @@ const translations = {
         langName: "中文",
         readBtn: "阅读",
         closeBtn: "关闭",
+        headerShaders: "光影下载",
+        headerModpacks: "模组包下载",
         // Modpack translations
         modpack1Title: "主模组包",
         modpack1Subtitle: "这是我用来制作 Minecraft 内容的模组包。",
@@ -100,10 +100,8 @@ const translations = {
         badgeBy: "by Seiyant"
     },
     ph: {
-        heroTitle: "Mga Shader Download",
         heroSubhead: "Lahat ng shader na na-edit ni Seiyant",
-        modpackHeroTitle: "Mga Modpack Download",
-        modpackHeroSubhead: "Modpack Sinubukan ni Seiyant",
+        modpackHeroSubhead: "Modpack na ginagamit ni Seiyant",
         followLabel: "I-follow ang TikTok →",
         donateTitle: "Suportahan si Seiyant",
         donateSub: "Mag-donate sa Sociabuzz",
@@ -123,6 +121,8 @@ const translations = {
         langName: "Filipino",
         readBtn: "Basahin",
         closeBtn: "Isara",
+        headerShaders: "Mga Shader Download",
+        headerModpacks: "Mga Modpack Download",
         // Modpack translations
         modpack1Title: "Pangunahing Modpack",
         modpack1Subtitle: "Ito ang modpack na ginagamit ko para gumawa ng Minecraft content.",
@@ -133,10 +133,8 @@ const translations = {
         badgeBy: "by Seiyant"
     },
     vn: {
-        heroTitle: "Tải Shader",
         heroSubhead: "Tất cả shader được chỉnh sửa bởi Seiyant",
-        modpackHeroTitle: "Tải Modpack",
-        modpackHeroSubhead: "Modpack Được Kiểm Tra bởi Seiyant",
+        modpackHeroSubhead: "Modpack được Seiyant sử dụng",
         followLabel: "Theo dõi TikTok →",
         donateTitle: "Ủng hộ Seiyant",
         donateSub: "Donate qua Sociabuzz",
@@ -156,6 +154,8 @@ const translations = {
         langName: "Tiếng Việt",
         readBtn: "Đọc",
         closeBtn: "Đóng",
+        headerShaders: "Tải Shader",
+        headerModpacks: "Tải Modpack",
         // Modpack translations
         modpack1Title: "Modpack Chính",
         modpack1Subtitle: "Đây là modpack tôi dùng để tạo nội dung Minecraft.",
@@ -166,10 +166,8 @@ const translations = {
         badgeBy: "by Seiyant"
     },
     ru: {
-        heroTitle: "Загрузка шейдеров",
         heroSubhead: "Все шейдеры отредактированы Seiyant",
-        modpackHeroTitle: "Загрузка модпаков",
-        modpackHeroSubhead: "Модпаки Протестированы Seiyant",
+        modpackHeroSubhead: "Модпак, используемый Seiyant",
         followLabel: "Подписаться на TikTok →",
         donateTitle: "Поддержать Seiyant",
         donateSub: "Пожертвовать через Sociabuzz",
@@ -189,6 +187,8 @@ const translations = {
         langName: "Русский",
         readBtn: "Читать",
         closeBtn: "Закрыть",
+        headerShaders: "Загрузка шейдеров",
+        headerModpacks: "Загрузка модпаков",
         // Modpack translations
         modpack1Title: "Основной Модпак",
         modpack1Subtitle: "Это модпак, который я использую для создания контента Minecraft.",
@@ -369,6 +369,17 @@ function toggleDisclaimer() {
     updateDisclaimerReadButton();
 }
 
+function updateHeaderText() {
+    const t = translations[currentLang];
+    if (!t) return;
+    const headerText = document.getElementById('headerLogoText');
+    if (currentTab === 'shaders') {
+        headerText.innerText = t.headerShaders || 'Shader Downloads';
+    } else {
+        headerText.innerText = t.headerModpacks || 'Modpack Downloads';
+    }
+}
+
 function applyLanguage(lang) {
     const t = translations[lang];
     if (!t) return;
@@ -377,6 +388,7 @@ function applyLanguage(lang) {
     
     // Update hero based on current tab
     updateHeroText();
+    updateHeaderText();
     
     document.getElementById('followLabel').innerText = t.followLabel;
     document.getElementById('donateTitle').innerHTML = t.donateTitle;
@@ -407,15 +419,12 @@ function updateHeroText() {
     const t = translations[currentLang];
     if (!t) return;
     
-    const heroTitle = document.getElementById('heroTitle');
     const heroSubhead = document.getElementById('heroSubhead');
     
     if (currentTab === 'shaders') {
-        heroTitle.innerText = t.heroTitle;
         heroSubhead.innerText = t.heroSubhead;
         document.querySelector('.main-content').classList.remove('modpacks-active');
     } else {
-        heroTitle.innerText = t.modpackHeroTitle;
         heroSubhead.innerText = t.modpackHeroSubhead;
         document.querySelector('.main-content').classList.add('modpacks-active');
     }
@@ -437,6 +446,7 @@ function switchTab(tab) {
     
     // Update hero text
     updateHeroText();
+    updateHeaderText();
     
     if (tab === 'shaders') {
         shadersTab.classList.add('active');
@@ -495,26 +505,6 @@ function setupPagination() {
     if (nextBottom) nextBottom.addEventListener('click', () => { const total = Math.ceil(currentDisplayItems.length / ITEMS_PER_PAGE); if (currentPage < total && currentTab === 'shaders') { currentPage++; renderPage(); } });
 }
 
-// Theme Toggle
-let currentTheme = 'light';
-function applyTheme(theme) {
-    if (theme === 'dark') {
-        document.body.classList.add('dark');
-        const themeIcon = document.querySelector('#themeToggleBtn .material-symbols-outlined');
-        if (themeIcon) themeIcon.innerText = 'light_mode';
-    } else {
-        document.body.classList.remove('dark');
-        const themeIcon = document.querySelector('#themeToggleBtn .material-symbols-outlined');
-        if (themeIcon) themeIcon.innerText = 'dark_mode';
-    }
-    currentTheme = theme;
-    localStorage.setItem('seiyantTheme', theme);
-}
-
-function toggleTheme() {
-    applyTheme(currentTheme === 'light' ? 'dark' : 'light');
-}
-
 // Language Popup handlers
 function initLangPopup() {
     const langWrapper = document.getElementById('langPopupWrapper');
@@ -541,8 +531,14 @@ function initLangPopup() {
 document.getElementById('shadersTabBtn')?.addEventListener('click', () => switchTab('shaders'));
 document.getElementById('modpacksTabBtn')?.addEventListener('click', () => switchTab('modpacks'));
 
-// Theme toggle button
-document.getElementById('themeToggleBtn')?.addEventListener('click', toggleTheme);
+// Header logo click untuk switch tab
+document.getElementById('headerLogo')?.addEventListener('click', () => {
+    if (currentTab === 'shaders') {
+        switchTab('modpacks');
+    } else {
+        switchTab('shaders');
+    }
+});
 
 // Disclaimer Read More button
 document.getElementById('disclaimerReadBtn')?.addEventListener('click', toggleDisclaimer);
@@ -552,11 +548,6 @@ buildShaderElements();
 buildModpackElements();
 setupPagination();
 initLangPopup();
-
-// Load saved theme
-const savedTheme = localStorage.getItem('seiyantTheme');
-if (savedTheme) applyTheme(savedTheme);
-else applyTheme('light');
 
 // Load saved language
 const savedLang = localStorage.getItem('seiyantLang');
