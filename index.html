@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>kontolhitam69</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=-apple-system,BlinkMacSystemFont,SF+Pro+Text,Helvetica Neue&display=swap" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="app-container">
-        <!-- Header Bar - Sticky with Rounded Corner -->
+        <!-- Header Bar -->
         <div class="header-bar">
             <div class="logo" id="headerLogo">
-                <span class="material-symbols-outlined">auto_awesome</span>
-                <span id="headerLogoText">Shader Downloads</span>
+                <span id="headerLogoText">Shaders</span>
             </div>
             <div class="header-actions">
+                <!-- Theme Toggle Button -->
+                <button id="themeToggle" class="header-btn theme-btn">
+                    <span class="material-symbols-outlined">dark_mode</span>
+                </button>
                 <!-- Language Button with Popup -->
                 <div class="popup-wrapper" id="langPopupWrapper">
                     <button id="langBtn" class="header-btn">
@@ -25,28 +28,25 @@
                     </button>
                     <div class="popup-menu lang-menu" id="langPopup">
                         <div class="popup-item" data-lang="en">
-                            <span class="flag">🇺🇸</span>
                             <span>English</span>
                         </div>
                         <div class="popup-item" data-lang="id">
-                            <span class="flag">🇮🇩</span>
                             <span>Bahasa Indonesia</span>
                         </div>
-                        <div class="popup-item" data-lang="cn">
-                            <span class="flag">🇨🇳</span>
-                            <span>中文</span>
-                        </div>
                         <div class="popup-item" data-lang="ph">
-                            <span class="flag">🇵🇭</span>
                             <span>Filipino</span>
                         </div>
                         <div class="popup-item" data-lang="vn">
-                            <span class="flag">🇻🇳</span>
                             <span>Tiếng Việt</span>
                         </div>
                         <div class="popup-item" data-lang="ru">
-                            <span class="flag">🇷🇺</span>
                             <span>Русский</span>
+                        </div>
+                        <div class="popup-item" data-lang="es">
+                            <span>Español</span>
+                        </div>
+                        <div class="popup-item" data-lang="pt">
+                            <span>Português</span>
                         </div>
                     </div>
                 </div>
@@ -58,15 +58,15 @@
             <!-- Hero Section -->
             <div class="hero">
                 <div class="hero-text">
-                    <div class="subhead" id="heroSubhead">All shaders edited by Seiyant</div>
+                    <div class="subhead" id="heroSubhead"></div>
                 </div>
             </div>
 
-            <!-- Combined Card: TikTok + Support (Gradient) -->
+            <!-- Combined Card: TikTok + Support -->
             <div class="combined-card">
                 <a href="https://www.tiktok.com/@xanderseii?_r=1&_t=ZS-96mzmKFxC35" class="combined-item tiktok-part" target="_blank">
                     <div class="combined-left">
-                        <img src="https://i.postimg.cc/T3bRyGQL/1779956959069.png" alt="TikTok Profile" class="tiktok-avatar">
+                        <img src="imgs/nicepeople69.png" alt="TikTok Profile" class="tiktok-avatar">
                         <div class="combined-text">
                             <div class="combined-username">Seiyant <span class="material-symbols-outlined">verified</span></div>
                             <div class="combined-label" id="followLabel">Follow TikTok →</div>
@@ -87,7 +87,7 @@
                 </a>
             </div>
 
-            <!-- Disclaimer Card with Read Button -->
+            <!-- Disclaimer Card -->
             <div class="disclaimer-card" id="disclaimerCard">
                 <span class="material-symbols-outlined disclaimer-icon">info</span>
                 <div class="disclaimer-content">
@@ -132,7 +132,7 @@
             <!-- Modpack Download List -->
             <div class="modpack-list" id="modpackList" style="display: none;"></div>
 
-            <!-- Coming Soon Area for Modpacks -->
+            <!-- Coming Soon Area -->
             <div class="coming-soon-area" id="comingSoonArea" style="display: none;">
                 <div class="coming-soon-glass">
                     <span class="material-symbols-outlined">construction</span>
@@ -150,7 +150,7 @@
             <div class="pagination-info" id="paginationInfo">Showing 1 - 5 of 15 shaders</div>
         </div>
 
-        <!-- Bottom Bar - Small Rounded Switcher Only (No background bar) -->
+        <!-- Bottom Bar -->
         <div class="bottom-bar">
             <div class="tab-switch">
                 <button id="shadersTabBtn" class="tab-btn active">
@@ -166,7 +166,7 @@
 
         <div class="footer">
             <span class="material-symbols-outlined">check_circle</span> 
-            Seiyant 2026 - Nice People 69
+            2026 - Nice People 69
         </div>
     </div>
 
