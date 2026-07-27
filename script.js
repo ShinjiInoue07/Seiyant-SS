@@ -5,7 +5,7 @@ const translations = {
         modpackHeroSubhead: "Modpack used by Seiyant",
         followLabel: "Follow TikTok →",
         donateTitle: "Support Seiyant",
-        donateSub: "Donate via Sociabuzz",
+        donateSub: "Donate via Sociabuzz →",
         disclaimerText: "<p>All shader files here are just edits made by me, Seiyant. I'm not the original creator of any of these shaders, and I never claim to be. I just tweak the settings to make them look a bit better and run a bit smoother. All copyrights belong to the original shader developers.</p><p>All shader settings are free. So don't waste your money buying shader configs, show some respect and support the original developers instead.</p>",
         modpackDisclaimerText: "If there are any errors or issues, feel free to DM my account and make sure you're following.",
         modpackDisclaimerTitle: "Disclaimer",
@@ -37,7 +37,7 @@ const translations = {
         modpackHeroSubhead: "Modpack yang dipake Seiyant",
         followLabel: "Ikuti TikTok →",
         donateTitle: "Dukung Seiyant",
-        donateSub: "Donasi via Sociabuzz",
+        donateSub: "Donasi via Sociabuzz →",
         disclaimerText: "<p>Semua file shader di sini cuma hasil edit dari gw, Seiyant. Gw bukan pembuat asli shadernya dan nggak pernah ngaku sebagai dev aslinya. Gw cuman nyetting tampilannya biar sedikit lebih cakep & ringan. Semua hak cipta tetep milik developer asli shader tersebut.</p><p>Semua settingan shader itu gratis. Jadi jangan keluarin uang cuma buat beli settingan shader, respect sama developernya cuy.</p>",
         modpackDisclaimerText: "Kalau ada error atau apa, bisa DM ke akun gw dan pastiin udah follow.",
         modpackDisclaimerTitle: "Disclaimer",
@@ -69,7 +69,7 @@ const translations = {
         modpackHeroSubhead: "Modpack na ginagamit ni Seiyant",
         followLabel: "I-follow ang TikTok →",
         donateTitle: "Suportahan si Seiyant",
-        donateSub: "Mag-donate sa Sociabuzz",
+        donateSub: "Mag-donate sa Sociabuzz →",
         disclaimerText: "<p>Ang lahat ng shader file dito ay mga edit lamang na ginawa ko, Seiyant. Hindi ako ang orihinal na gumawa ng mga shader na ito, at hindi ko kailanman sinasabing ako ay. Inaayos ko lang ang mga setting para maging mas maganda at mas maayos ang takbo. Lahat ng copyright ay pagmamay-ari ng orihinal na developer ng shader.</p><p>Lahat ng shader settings ay libre. Kaya huwag sayangin ang iyong pera sa pagbili ng shader configs, magpakita ng respeto at suportahan ang orihinal na mga developer.</p>",
         modpackDisclaimerText: "Kung mayroong anumang error o isyu, mag-DM lang sa aking account at siguraduhing naka-follow.",
         modpackDisclaimerTitle: "Pagtanggi sa Pananagutan",
@@ -101,7 +101,7 @@ const translations = {
         modpackHeroSubhead: "Modpack được Seiyant sử dụng",
         followLabel: "Theo dõi TikTok →",
         donateTitle: "Ủng hộ Seiyant",
-        donateSub: "Donate qua Sociabuzz",
+        donateSub: "Donate qua Sociabuzz →",
         disclaimerText: "<p>Tất cả các file shader ở đây chỉ là bản chỉnh sửa của tôi, Seiyant. Tôi không phải là người tạo ra các shader này, và tôi không bao giờ tuyên bố như vậy. Tôi chỉ điều chỉnh cài đặt để chúng trông đẹp hơn và chạy mượt mà hơn. Mọi bản quyền thuộc về nhà phát triển shader gốc.</p><p>Tất cả cài đặt shader đều miễn phí. Vì vậy, đừng lãng phí tiền mua config shader, hãy tôn trọng và ủng hộ các nhà phát triển gốc.</p>",
         modpackDisclaimerText: "Nếu có bất kỳ lỗi hoặc vấn đề gì, hãy nhắn tin cho tài khoản của tôi và đảm bảo bạn đã theo dõi.",
         modpackDisclaimerTitle: "Tuyên bố miễn trừ",
@@ -133,7 +133,7 @@ const translations = {
         modpackHeroSubhead: "Модпак, используемый Seiyant",
         followLabel: "Подписаться на TikTok →",
         donateTitle: "Поддержать Seiyant",
-        donateSub: "Пожертвовать через Sociabuzz",
+        donateSub: "Пожертвовать через Sociabuzz →",
         disclaimerText: "<p>Все файлы шейдеров здесь — это просто мои правки, Seiyant. Я не являюсь оригинальным создателем этих шейдеров и никогда не утверждаю обратного. Я просто настраиваю параметры, чтобы они выглядели лучше и работали плавнее. Все авторские права принадлежат оригинальным разработчикам шейдеров.</p><p>Все настройки шейдеров бесплатны. Не тратьте деньги на покупку конфигов шейдеров, проявите уважение и поддержите оригинальных разработчиков.</p>",
         modpackDisclaimerText: "Если есть какие-либо ошибки или проблемы, напишите в личные сообщения моему аккаунту и убедитесь, что вы подписаны.",
         modpackDisclaimerTitle: "Отказ от ответственности",
@@ -165,7 +165,7 @@ const translations = {
         modpackHeroSubhead: "Modpack usado por Seiyant",
         followLabel: "Seguir en TikTok →",
         donateTitle: "Apoyar a Seiyant",
-        donateSub: "Donar vía Sociabuzz",
+        donateSub: "Donar vía Sociabuzz →",
         disclaimerText: "<p>Todos los archivos de shaders aquí son solo ediciones hechas por mí, Seiyant. No soy el creador original de ninguno de estos shaders, y nunca pretendo serlo. Solo ajusto la configuración para que se vean mejor y funcionen más fluidamente. Todos los derechos de autor pertenecen a los desarrolladores originales de shaders.</p><p>Todas las configuraciones de shaders son gratuitas. Así que no gastes dinero comprando configuraciones de shaders, muestra respeto y apoya a los desarrolladores originales.</p>",
         modpackDisclaimerText: "Si hay algún error o problema, no dudes en enviarme un DM y asegúrate de estar siguiendo.",
         modpackDisclaimerTitle: "Aviso legal",
@@ -197,7 +197,7 @@ const translations = {
         modpackHeroSubhead: "Modpack usado por Seiyant",
         followLabel: "Seguir no TikTok →",
         donateTitle: "Apoiar Seiyant",
-        donateSub: "Doar via Sociabuzz",
+        donateSub: "Doar via Sociabuzz →",
         disclaimerText: "<p>Todos os arquivos de shaders aqui são apenas edições feitas por mim, Seiyant. Não sou o criador original de nenhum desses shaders e nunca afirmo ser. Apenas ajusto as configurações para que pareçam melhores e funcionem mais suavemente. Todos os direitos autorais pertencem aos desenvolvedores originais de shaders.</p><p>Todas as configurações de shaders são gratuitas. Portanto, não desperdice seu dinheiro comprando configurações de shaders, mostre respeito e apoie os desenvolvedores originais.</p>",
         modpackDisclaimerText: "Se houver algum erro ou problema, sinta-se à vontade para enviar uma DM para minha conta e certifique-se de estar seguindo.",
         modpackDisclaimerTitle: "Aviso legal",
@@ -441,7 +441,7 @@ function buildModpackElements() {
         }).join('');
         
         item.innerHTML = `
-            <div class="item-icon"><span class="material-symbols-outlined">package_2</span></div>
+            <img src="imgs/fabric.png" alt="Fabric" class="shader-icon modpack-icon" onerror="this.style.display='none'">
             <div class="item-content">
                 <div class="item-title modpack-title">${title}</div>
                 <div class="item-subtitle">${subtitle}</div>
