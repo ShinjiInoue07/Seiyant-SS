@@ -228,6 +228,13 @@ const translations = {
 
 // Shader Data with icon mapping
 const shadersData = [
+   { 
+        title: "BSL Refined II", 
+        developer: "CaptTatsu", 
+        editor: "Seiyant", 
+        url: "https://sfile.co/VVtzNIKSCG2",
+        icon: "imgs/bsl.png"
+    },
     { 
         title: "Derivative NEXT", 
         developer: "HaringPro", 
